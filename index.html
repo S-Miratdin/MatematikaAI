@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MatematikaAI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="icon_site.jpeg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');</script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ TOP NAV ══════════════ -->
+  <header class="top-bar">
+    <div class="top-bar-brand">
+      <span class="brand-dot"></span>
+      <span class="brand-name">MatematikaAI</span>
+      <span class="brand-sub">Qaraqalpaqsha</span>
+    </div>
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="solver">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Másele
+      </button>
+      <button class="tab-btn" data-tab="calc">
+        <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h2M9 6h2M5 10h2M9 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Kalkulyator
+      </button>
+      <button class="tab-btn" data-tab="kb">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Baza
+      </button>
+      <button class="tab-btn" data-tab="tasks">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12M2 8h8M13 11l-3 3-1.5-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Shınıǵıw
+      </button>
+      <button class="tab-btn" data-tab="admin" id="adminTabBtn" style="display:none">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Admin
+      </button>
+    </nav>
+    <div class="auth-bar">
+      <div id="userChip" class="user-chip" style="display:none">
+        <span id="userChipName"></span>
+        <button class="btn-ghost-sm" onclick="authLogout()">Выйти</button>
+      </div>
+      <button id="loginBtn" class="btn-primary btn-sm" onclick="openAuthModal('login')">Войти</button>
+    </div>
+    <button class="btn-ghost theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️ Светлая</button>
+  </header>
+
+  <!-- ══════════════ PANELS ══════════════ -->
+  <main class="panels">
+
+    <!-- ━━━━━━━━━━━━ TAB 1: SOLVER ━━━━━━━━━━━━ -->
+    <section class="panel active" id="panel-solver">
+      <div class="solver-layout">
+
+        <!-- Left: input + result -->
+        <div class="solver-left">
+          <div class="panel-header">
+            <h2>Másele sheshiw</h2>
+            <p>Máseleni qálegen tilde jazıń - juwap <strong>Qaraqalpaqsha</strong> beriledi</p>
+          </div>
+
+          <div class="card">
+            <label class="field-label">Máseleni jazin / Введите задачу</label>
+            <textarea id="problemInput" class="field-textarea" rows="5"
+              placeholder="Qaraqalpaqsha: x^2 - 5x + 6 = 0 tenglemeni sheshiw&#10;Ruscha: Реши уравнение x^2 - 5x + 6 = 0&#10;English: Solve x^2 - 5x + 6 = 0"></textarea>
+
+            <div class="btn-row">
+              <button class="btn-primary" id="solveBtn" onclick="solveClicked()">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Esaplaw
+              </button>
+              <button class="btn-danger" onclick="clearSolver()">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Oshiriw
+              </button>
+            </div>
+
+            <div class="status-bar" id="solverStatus"></div>
+          </div>
+
+          <div class="card" id="resultCard" style="display:none">
+            <label class="field-label">Juwap (Qaraqalpaqsha) / Ответ (Каракалпакский)</label>
+            <div class="result-box" id="resultBox"></div>
+          </div>
+        </div>
+
+        <!-- Right: history -->
+        <div class="solver-right">
+          <div class="history-header">
+            <span class="field-label">Tariyx</span>
+            <button class="btn-ghost-sm" onclick="clearHistory()">
+              <svg viewBox="0 0 14 14" fill="none"><path d="M2 4h10M5 4V2h4v2M6 7v4M8 7v4M3 4l1 8h6l1-8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Tazalaw
+            </button>
+          </div>
+          <div class="history-list" id="historyList">
+            <div class="history-empty">Tariyx basi</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━━━ TAB 2: CALCULATOR ━━━━━━━━━━━━ -->
+    <section class="panel" id="panel-calc">
+      <div class="calc-layout">
+
+        <!-- Left: regular calculator -->
+        <div class="calc-left">
+          <div class="panel-header" style="text-align:center">
+            <h2>Kalkulyator</h2>
+          </div>
+          <div class="card calc-card">
+            <input type="text" id="calcDisplay" class="calc-display" value="" readonly placeholder="0">
+            <div class="calc-grid">
+              <button class="calc-btn op" onclick="calcClear()">C</button>
+              <button class="calc-btn op" onclick="calcDel()">⌫</button>
+              <button class="calc-btn op" onclick="calcAppend('%')">%</button>
+              <button class="calc-btn op accent" onclick="calcAppend('/')">÷</button>
+
+              <button class="calc-btn" onclick="calcAppend('7')">7</button>
+              <button class="calc-btn" onclick="calcAppend('8')">8</button>
+              <button class="calc-btn" onclick="calcAppend('9')">9</button>
+              <button class="calc-btn op accent" onclick="calcAppend('*')">×</button>
+
+              <button class="calc-btn" onclick="calcAppend('4')">4</button>
+              <button class="calc-btn" onclick="calcAppend('5')">5</button>
+              <button class="calc-btn" onclick="calcAppend('6')">6</button>
+              <button class="calc-btn op accent" onclick="calcAppend('-')">−</button>
+
+              <button class="calc-btn" onclick="calcAppend('1')">1</button>
+              <button class="calc-btn" onclick="calcAppend('2')">2</button>
+              <button class="calc-btn" onclick="calcAppend('3')">3</button>
+              <button class="calc-btn op accent" onclick="calcAppend('+')">+</button>
+
+              <button class="calc-btn zero" onclick="calcAppend('0')">0</button>
+              <button class="calc-btn" onclick="calcAppend('.')">.</button>
+              <button class="calc-btn op eq" onclick="calcEqual()">=</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: photo solver -->
+        <div class="calc-right">
+          <div class="panel-header">
+            <h2>Foto Másele</h2>
+            <p>Másele súwretin júkleń -<strong>AI</strong> sheship beredi</p>
+          </div>
+
+          <div class="card">
+            <label class="field-label">Súwret júklew</label>
+            <div class="photo-drop-area" id="photoDropArea" onclick="document.getElementById('photoInput').click()">
+              <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="photoSelected(this)">
+              <div class="photo-drop-inner" id="photoDropInner">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="8" width="36" height="26" rx="4" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="20" cy="21" r="7" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="20" cy="21" r="3" fill="currentColor" opacity="0.4"/>
+                  <path d="M14 8l2-4h8l2 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="31" cy="14" r="2" fill="currentColor" opacity="0.5"/>
+                </svg>
+                <span>Súwretti tańlań yamasa usı jerge taslań</span>
+                <span class="photo-hint">JPG, PNG, WEBP — másele súwreti</span>
+              </div>
+              <img id="photoPreview" class="photo-preview" style="display:none" alt="preview">
+            </div>
+
+            <div class="btn-row">
+              <button class="btn-primary" id="photoSolveBtn" onclick="photoSolve()">
+                <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Sheshiw
+              </button>
+              <button class="btn-danger" onclick="clearPhoto()">
+                <svg viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Tazalaw
+              </button>
+            </div>
+
+            <div class="status-bar" id="photoStatus"></div>
+          </div>
+
+          <div class="card" id="photoResultCard" style="display:none">
+            <label class="field-label">Ответ</label>
+            <div class="photo-result-box" id="photoResultBox"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━━━ TAB 3: KNOWLEDGE BASE ━━━━━━━━━━━━ -->
+    <section class="panel" id="panel-kb">
+      <div class="kb2-layout">
+
+        <!-- Left: search + topic list -->
+        <div class="kb2-left">
+          <div class="kb2-search-wrap">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><line x1="10" y1="10" x2="14" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <input type="text" id="kbSearchInput" class="kb2-search" placeholder="Поиск темы..." oninput="kbFilter(this.value)">
+          </div>
+          <div class="kb2-lang-row">
+            <button class="kb2-lang-btn active" id="kbLangRus" onclick="kbSetLang('ru')">RUS</button>
+            <button class="kb2-lang-btn" id="kbLangUzb" onclick="kbSetLang('uz')">UZB</button>
+          </div>
+          <div class="kb2-filter-bar" id="kbFilterBar">
+            <select class="kb2-filter-select" id="kbFilterSection" onchange="kbSetMetaFilter('school_section', this.value)">
+              <option value="">Все разделы</option>
+              <option>Арифметика</option>
+              <option>Алгебра</option>
+              <option>Геометрия</option>
+              <option>Тригонометрия</option>
+              <option>Анализ</option>
+            </select>
+            <select class="kb2-filter-select" id="kbFilterType" onchange="kbSetMetaFilter('task_type', this.value)">
+              <option value="">Все типы</option>
+              <option>Уравнения</option>
+              <option>Фигуры</option>
+              <option>Функции</option>
+              <option>Прогрессии</option>
+              <option>Проценты</option>
+              <option>Степени</option>
+            </select>
+            <select class="kb2-filter-select" id="kbFilterGrade" onchange="kbSetMetaFilter('grade', this.value)">
+              <option value="">Все классы</option>
+              <option>5-6 класс</option>
+              <option>7-8 класс</option>
+              <option>8-9 класс</option>
+              <option>9-10 класс</option>
+              <option>11 класс</option>
+            </select>
+            <div class="kb2-diff-btns">
+              <button class="kb2-diff-btn easy"   title="Легко"   onclick="kbToggleDiff('easy')"  >🟢</button>
+              <button class="kb2-diff-btn medium" title="Средне" onclick="kbToggleDiff('medium')">🟡</button>
+              <button class="kb2-diff-btn hard"   title="Сложно" onclick="kbToggleDiff('hard')"  >🔴</button>
+            </div>
+            <button class="btn-ghost-sm" onclick="kbResetFilters()">✕</button>
+          </div>
+          <div class="kb2-auth-actions">
+            <button class="btn-ghost-sm" id="kbSuggestBtn" style="display:none" onclick="openSuggestModal()">+ Предложить тему</button>
+          </div>
+          <div class="kb2-nav" id="kbNav"></div>
+        </div>
+
+        <!-- Right: topic detail -->
+        <div class="kb2-right" id="kbDetail">
+          <div class="kb2-placeholder">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="5" stroke="currentColor" stroke-width="1.5"/><path d="M15 17h18M15 24h12M15 31h15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>Выберите тему из списка</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━━━ TAB 4: Shınıǵıw (TASKS) ━━━━━━━━━━━━ -->
+    <section class="panel" id="panel-tasks">
+      <div class="tasks-container">
+
+        <!-- Screen 1: Topic list -->
+        <div id="tasks-screen-list">
+          <div class="panel-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <div>
+              <h2 id="tasksTitle">Shınıǵıw</h2>
+              <p id="tasksSubtitle">Temanı tańlań hám shinıǵıń.</p>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="kb2-lang-btn active" id="tasksLangRu" onclick="tasksSetLang('ru')">RUS</button>
+              <button class="kb2-lang-btn" id="tasksLangUz" onclick="tasksSetLang('uz')">UZB</button>
+            </div>
+          </div>
+          <div class="tasks-list" id="tasksTopicList">
+            <div class="tasks-empty">Júklenip atır...</div>
+          </div>
+        </div>
+
+        <!-- Screen 2: Practice -->
+        <div id="tasks-screen-practice" style="display:none"></div>
+
+        <!-- Screen 3: Results -->
+        <div id="tasks-screen-results" style="display:none"></div>
+
+      </div>
+    </section>
+
+    <!-- ━━━━━━━━━━━━ TAB 5: ADMIN ━━━━━━━━━━━━ -->
+    <section class="panel" id="panel-admin">
+      <div class="admin-layout">
+        <div class="admin-section">
+          <h3 class="admin-section-title">Пользователи</h3>
+          <div id="adminUsersList" class="admin-list"></div>
+        </div>
+        <div class="admin-section">
+          <h3 class="admin-section-title">
+            Предложения тем
+            <span id="suggestionsBadge" class="badge" style="display:none"></span>
+          </h3>
+          <div id="adminSuggestionsList" class="admin-list"></div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@13.0.3/marked.min.js"></script>
+<!-- ══════════════ AUTH MODAL ══════════════ -->
+<div class="modal-overlay" id="authModal" style="display:none" onclick="closeAuthModal(event)">
+  <div class="modal-box">
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="modalTabLogin" onclick="switchModalTab('login')">Вход</button>
+      <button class="modal-tab" id="modalTabRegister" onclick="switchModalTab('register')">Регистрация</button>
+    </div>
+    <form class="modal-form" id="loginForm" onsubmit="authLogin(event)">
+      <label class="field-label">Логин</label>
+      <input type="text" class="field-input" id="loginUsername" autocomplete="username" required>
+      <label class="field-label">Пароль</label>
+      <input type="password" class="field-input" id="loginPassword" autocomplete="current-password" required>
+      <div class="modal-error" id="loginError"></div>
+      <button type="submit" class="btn-primary w-full">Войти</button>
+    </form>
+    <form class="modal-form" id="registerForm" style="display:none" onsubmit="authRegister(event)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div>
+          <label class="field-label">Имя</label>
+          <input type="text" class="field-input" id="regFirstName" autocomplete="given-name" required>
+        </div>
+        <div>
+          <label class="field-label">Фамилия</label>
+          <input type="text" class="field-input" id="regLastName" autocomplete="family-name" required>
+        </div>
+      </div>
+      <label class="field-label">Телефон</label>
+      <input type="tel" class="field-input" id="regPhone" autocomplete="tel" placeholder="+7 (___) ___-__-__">
+      <label class="field-label">Логин</label>
+      <input type="text" class="field-input" id="regUsername" autocomplete="username" required>
+      <label class="field-label">Email</label>
+      <input type="email" class="field-input" id="regEmail" autocomplete="email" required>
+      <label class="field-label">Пароль (мин. 6 символов)</label>
+      <input type="password" class="field-input" id="regPassword" autocomplete="new-password" minlength="6" required>
+      <div class="modal-error" id="registerError"></div>
+      <button type="submit" class="btn-primary w-full">Зарегистрироваться</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════ SUGGEST MODAL ══════════════ -->
+<div class="modal-overlay" id="suggestModal" style="display:none" onclick="closeSuggestModal(event)">
+  <div class="modal-box">
+    <h3 class="modal-title">Предложить тему</h3>
+    <form class="modal-form" onsubmit="submitSuggestion(event)">
+      <label class="field-label">Название темы</label>
+      <input type="text" class="field-input" id="suggestTitle" required>
+      <label class="field-label">Содержание / формулы</label>
+      <textarea class="field-textarea" id="suggestContent" rows="5" required></textarea>
+      <div class="modal-error" id="suggestError"></div>
+      <button type="submit" class="btn-primary w-full">Отправить на проверку</button>
+    </form>
+  </div>
+</div>
+
+<div id="limitModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;max-width:380px;width:90%;text-align:center;">
+    <div style="font-size:32px;margin-bottom:12px;">🔒</div>
+    <p id="limitModalText" style="color:var(--text);font-size:14px;line-height:1.6;margin-bottom:20px;"></p>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button onclick="$('limitModal').style.display='none';openAuthModal('register')" class="btn-primary">Зарегистрироваться</button>
+      <button onclick="$('limitModal').style.display='none'" class="btn-ghost-sm">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script src="kb_data.js"></script>
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof renderMathInElement !== 'undefined') {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true },
+        ],
+        throwOnError: false,
+      });
+    }
+  });
+</script>
+</body>
+</html>

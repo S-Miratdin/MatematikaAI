@@ -1,0 +1,14 @@
+[
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "1) Sergeyde 3 alma bar edi, ol 2 almadan jedi.\n$3 - 2 = 1$ (Sergeyde alma qaldı).\n\n2) Natashanıń 2 alması bar edi, ol 1 alma jedi.\n$2 - 1 = 1$ (Nashada alma qaldı).\n\n3) jámi alma qaldı:\n1$ + 1 = 2$ (alma).\n\nSergey menen Natashanıń qolında bir-birden, jámi eki alma qaldı."
+  },
+  {
+    "problem": "Polizdan 350 kg sabzi, 175 kg sholg‘om ham\nda sabzi va sholg‘om birgalikda qancha bo‘lsa,\nshuncha kartoshka yig‘ib olindi. Polizdan jami\nqancha sabzavot yig‘ib olingan?",
+    "solution": "1) 350 + 175 = 525 (kg) - sonsha geshir hám shalgam birge terilgen.\n2) 525 (kg) - sonsha kartoshka terilgen.\n3) 525 + 525 = 1050 (kg) - barlıq palız ónimleri jiynap alındı.\n\nJuwabi: Jámi 1050 kg palız ónimleri jiynap alındı."
+  },
+  {
+    "problem": "Bir samolyot 2 soat, ikkinchisi esa 5 soat uch\ndi. Ikkinchi samolyot birinchisiga qaraganda\n2100km ortiq masofani uchib o‘tdi. Agar samo\nlyotlarning tezligi bir xil bo‘lsa, ularning har biri\nqanday masofani o‘tgan?",
+    "solution": "1. Ushıw waqtınıń ayırmasın tabamız:\n5-2=3$ (saat).\n\n2. Samolyotlardıń tezligi birdey bolģanı ushın aralıq ayırması (2100 km) ekinshi samolyottıń artıqsha 3 saatta uship ótken aralıǵı boladı. Bir samolyottıń tezligin tabamız:\n2100 dollar: 3 = 700 dollar (km/saat).\n\n3. Hárbir samolyot uship ótken aralıqtı tabamız:\nBirinshisi: $700 \\times 2 = 1400$ (km);\nEkinshi: $700 \\times 5 = 3500$ (km);\n\nJuwabi: Birinshi samolyot 1400 km, ekinshisi bolsa 3500 km aralıqtı uship ótti."
+  }
+]
