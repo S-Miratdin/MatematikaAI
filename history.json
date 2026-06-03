@@ -1,0 +1,38 @@
+[
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "1) Sergeyde 3 alma bar edi, ol 2 almadan jedi.\n$3 - 2 = 1$ (Sergeyde alma qaldı).\n\n2) Natashanıń 2 alması bar edi, ol 1 alma jedi.\n$2 - 1 = 1$ (Nashada alma qaldı).\n\n3) jámi alma qaldı:\n1$ + 1 = 2$ (alma).\n\nSergey menen Natashanıń qolında bir-birden, jámi eki alma qaldı."
+  },
+  {
+    "problem": "Polizdan 350 kg sabzi, 175 kg sholg‘om ham\nda sabzi va sholg‘om birgalikda qancha bo‘lsa,\nshuncha kartoshka yig‘ib olindi. Polizdan jami\nqancha sabzavot yig‘ib olingan?",
+    "solution": "1) 350 + 175 = 525 (kg) - sonsha geshir hám shalgam birge terilgen.\n2) 525 (kg) - sonsha kartoshka terilgen.\n3) 525 + 525 = 1050 (kg) - barlıq palız ónimleri jiynap alındı.\n\nJuwabi: Jámi 1050 kg palız ónimleri jiynap alındı."
+  },
+  {
+    "problem": "Bir samolyot 2 soat, ikkinchisi esa 5 soat uch\ndi. Ikkinchi samolyot birinchisiga qaraganda\n2100km ortiq masofani uchib o‘tdi. Agar samo\nlyotlarning tezligi bir xil bo‘lsa, ularning har biri\nqanday masofani o‘tgan?",
+    "solution": "1. Ushıw waqtınıń ayırmasın tabamız:\n5-2=3$ (saat).\n\n2. Samolyotlardıń tezligi birdey bolģanı ushın aralıq ayırması (2100 km) ekinshi samolyottıń artıqsha 3 saatta uship ótken aralıǵı boladı. Bir samolyottıń tezligin tabamız:\n2100 dollar: 3 = 700 dollar (km/saat).\n\n3. Hárbir samolyot uship ótken aralıqtı tabamız:\nBirinshisi: $700 \\times 2 = 1400$ (km);\nEkinshi: $700 \\times 5 = 3500$ (km);\n\nJuwabi: Birinshi samolyot 1400 km, ekinshisi bolsa 3500 km aralıqtı uship ótti."
+  },
+  {
+    "problem": "Bir samolyot 2 soat, ikkinchisi esa 5 soat uch\ndi. Ikkinchi samolyot birinchisiga qaraganda\n2100km ortiq masofani uchib o‘tdi. Agar samo\nlyotlarning tezligi bir xil bo‘lsa, ularning har biri\nqanday masofani o‘tgan?",
+    "solution": "1. Hár eki tegisliktiń tezligi \\ (v \\) km/h bolsın.\n2. Birinshi samolyot 2 saat ushadı, demek ol aralıqtı basıp ótedi:\n   \\ (d_1 = v \\times 2 \\).\n3. Ekinshi samolyot 5 saat ushadı, demek ol aralıqtı basıp ótedi:\n   \\ (d_2 = v \\times 5 \\).\n4. Máselege kóre, ekinshi samolyot birinshi samolyotqa qaraganda 2100 km kóp ushadı:\n   \\ (d_2 = d_1 + 2100 \\).\n5. Endi teńlemeni jazamız:\n   \\ (v \\times 5 = v \\times 2 + 2100 \\).\n6. Bunı ápiwayılastırıp, tómendegilerge iye bolamız:\n   \\ (5v - 2v = 2100 \\)\n   \\ (3v = 2100 \\)\n   \\ (v = 700 \\) km/h.\n7. Endi eki tegislik ushın da aralıqlardı tabamız:\n   \\ (d_1 = v \\times 2 = 700 \\times 2 = 1400 \\) km.\n   \\ (d_2 = v \\times 5 = 700 \\times 5 = 3500 \\) km.\n\nJuwmaqlawshı juwap: Birinshi samolyot _MATH_PROT_54_ km, ekinshisi _MATH_PROT_55_ km aralıqtı basıp ótti."
+  },
+  {
+    "problem": "Sergeyning 3 ta, Natashaning 2 ta olmasi bor edi. Sergey 2 ta, Natasha esa 1 ta olma yedi. Sergey va Natashada nechta olma qoldi?",
+    "solution": "1. Sergeydiń baslanıstaǵı almaları: 3 dana.\n2. Natashaning boshlanishdagi olmalari: 2 ta.\n3. Sergey 2 ta olma yedi, shuning uchun uning qolgan olmalari: 3 - 2 = 1 ta.\n4. Natasha 1 ta olma yedi, shuning uchun uning qolgan olmalari: 2 - 1 = 1 ta.\n\nEndi, Sergeyning va Natashaning qolgan olmalari:\n__MATH_PROT_18_ Sergey: __MATH_PROT_19_ ta\n- Natasha: 1 dana\n\nQisqa juwap: Sergeyde 1 ta, Natashada 1 ta alma qaldı."
+  },
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "Сначала найдем, сколько яблок было у Сергея и Наташи:\n\n1. У Сергея было 3 яблока.\n2. У Наташи было 2 яблока.\n\nТеперь посчитаем, сколько яблок они съели:\n\n1. Сергей съел 2 яблока: 3 - 2 = 1 яблоко осталось у Сергея.\n2. Наташа съела 1 яблоко: 2 - 1 = 1 яблоко осталось у Наташи.\n\nТеперь подведем итог:\n\nУ Сергея осталось 1 яблоко, а у Наташи — 1 яблоко.\n\nФинальный ответ: У Сергея 1 яблоко, у Наташи 1 яблоко."
+  },
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "Давай решим задачу шаг за шагом.\n\n1. У Сергея было 3 яблока.\n2. У Наташи было 2 яблока.\n3. Сергей съел 2 яблока: 3 - 2 = 1 яблоко у Сергея.\n4. Наташа съела 1 яблоко: 2 - 1 = 1 яблоко у Наташи.\n\nТеперь посчитаем, сколько яблок осталось у Сергея и Наташи:\n- У Сергея 1 яблоко.\n- У Наташи 1 яблоко.\n\n5. Сложим яблоки: 1 + 1 = 2 яблока.\n\nОтвет: У Сергея и Наташи осталось 2 яблока."
+  },
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "Давайте решим задачу шаг за шагом.\n\n1. У Сергея изначально было 3 яблока.\n2. У Наташи изначально было 2 яблока.\n3. Сергей съел 2 яблока: 3 - 2 = 1 яблоко осталось у Сергея.\n4. Наташа съела 1 яблоко: 2 - 1 = 1 яблоко осталось у Наташи.\n\nТеперь посчитаем, сколько яблок осталось у обоих:\n- У Сергея: 1 яблоко.\n- У Наташи: 1 яблоко.\n\nТеперь сложим: 1 + 1 = 2 яблока всего.\n\nОтвет: У Сергея осталось 1 яблоко, у Наташи — 1 яблоко, всего 2 яблока."
+  },
+  {
+    "problem": "У Сергея было три яблоко а у Наташи два Сергей съел два яблоко а Наташа одну сколько осталось яблок у Сергея и Наташи",
+    "solution": "1. Dáslep Seriktiń 3 alması bolgan.\n2. Sergey 2 alma jedi: 3 - 2 = 1 alma.\n3. Natashada dáslep 2 alma bar edi.\n4. Natasha 1 alma jeydi: 2 - 1 = 1 alma.\n\nEndi hárbir adamda neshe alma qalganın esaplaymiz:\n- Sergeyde 1 alma qaldı.\n- Natashada 1 alma qaldı.\n\nJuwap: Sergeyde 1 alma, Natashada 1 alma bar."
+  }
+]
