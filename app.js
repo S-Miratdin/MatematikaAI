@@ -947,8 +947,16 @@ async function loadTasksTab() {
   const list = $('tasksTopicList');
   if (!list) return;
   try {
-    const r      = await fetch('/api/problems/counts');
-    const counts = await r.json();
+    let counts;
+    if (typeof PROBLEMS_DATA !== 'undefined') {
+      counts = {};
+      for (const [topicId, problems] of Object.entries(PROBLEMS_DATA)) {
+        counts[topicId] = problems.length;
+      }
+    } else {
+      const r = await fetch('/api/problems/counts');
+      counts = await r.json();
+    }
     _taskCounts   = counts;
     _taskTopicIds = new Set(Object.keys(counts).map(String));
     renderTasksList(counts);
@@ -1042,8 +1050,13 @@ async function selectTopic(topicId) {
   if (!_taskCurTopic) return;
 
   try {
-    const r        = await fetch(`/api/problems/${topicId}`);
-    const problems = await r.json();
+    let problems;
+    if (typeof PROBLEMS_DATA !== 'undefined' && PROBLEMS_DATA[topicId]) {
+      problems = PROBLEMS_DATA[topicId];
+    } else {
+      const r = await fetch(`/api/problems/${topicId}`);
+      problems = await r.json();
+    }
     if (!problems.length) return;
 
     _taskProblems = [...problems].sort(() => Math.random() - 0.5);
