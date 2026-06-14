@@ -162,6 +162,13 @@ body::before {
   color: var(--text);
 }
 
+.tab-btn-home {
+  margin-right: 6px;
+  padding: 6px 10px;
+  border-right: 1px solid var(--border);
+  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+}
+
 .tab-btn.active {
   background: var(--accent-soft);
   color: var(--accent);

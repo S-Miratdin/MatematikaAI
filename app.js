@@ -66,9 +66,16 @@ function selectTab(tab) {
   if (tab === 'tasks') loadTasksTab();
 }
 
-document.querySelectorAll('.tab-btn').forEach(btn => {
+document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
   btn.addEventListener('click', () => selectTab(btn.dataset.tab));
 });
+
+function goHome() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  $('panel-home').classList.add('active');
+  document.querySelector('.app-shell').classList.add('home-mode');
+}
 
 document.querySelectorAll('.home-card').forEach(card => {
   card.addEventListener('click', () => selectTab(card.dataset.tab));
