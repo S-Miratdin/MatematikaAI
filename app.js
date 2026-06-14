@@ -54,17 +54,42 @@ function showLimitModal(key) {
 // ════════════════════════════════════════════════════════════
 //  TAB SWITCHING
 // ════════════════════════════════════════════════════════════
+function selectTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+  if (btn) btn.classList.add('active');
+  $('panel-' + tab).classList.add('active');
+  document.querySelector('.app-shell').classList.remove('home-mode');
+  localStorage.setItem('lastTab', tab);
+  if (tab === 'admin' && currentUser?.role === 'admin') loadAdminPanel();
+  if (tab === 'tasks') loadTasksTab();
+}
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    $('panel-' + tab).classList.add('active');
-    if (tab === 'admin' && currentUser?.role === 'admin') loadAdminPanel();
-    if (tab === 'tasks') loadTasksTab();
-  });
+  btn.addEventListener('click', () => selectTab(btn.dataset.tab));
 });
+
+document.querySelectorAll('.home-card').forEach(card => {
+  card.addEventListener('click', () => selectTab(card.dataset.tab));
+});
+
+function initHomeOrLastTab() {
+  const lastTab   = localStorage.getItem('lastTab');
+  const validTabs = ['solver', 'calc', 'kb', 'tasks', 'admin'];
+  const tabValid  = lastTab
+    && validTabs.includes(lastTab)
+    && (lastTab !== 'admin' || currentUser?.role === 'admin');
+
+  if (tabValid) {
+    selectTab(lastTab);
+  } else {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    $('panel-home').classList.add('active');
+    document.querySelector('.app-shell').classList.add('home-mode');
+  }
+  document.documentElement.classList.remove('home-pending');
+}
 
 
 // ════════════════════════════════════════════════════════════
@@ -92,6 +117,7 @@ function initTheme() {
 document.addEventListener('DOMContentLoaded', async () => {
   initTheme();
   await loadAuth();
+  initHomeOrLastTab();
   await loadConfig();
   await loadHistory();
   kbInit();
