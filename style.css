@@ -197,6 +197,85 @@ body::before {
 .panel::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
 
 /* ─────────────────────────────────────────────
+   HOME SCREEN
+───────────────────────────────────────────── */
+html.home-pending #panel-solver.panel.active { display: none; }
+html.home-pending #panel-home { display: block; }
+html.home-pending .tab-nav { display: none; }
+
+.app-shell.home-mode .tab-nav { display: none; }
+
+.home-hero {
+  text-align: center;
+  margin: 40px 0 28px;
+}
+
+.home-hero h2 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.home-hero p {
+  margin-top: 6px;
+  color: var(--text2);
+  font-size: 14px;
+}
+
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 16px;
+  color: var(--text);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.home-card svg {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+
+.home-card-title {
+  font-family: var(--font-title);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.home-card-desc {
+  font-size: 12px;
+  color: var(--text2);
+  text-align: center;
+}
+
+.home-card:hover {
+  background: var(--surface2);
+  border-color: var(--border2);
+}
+
+@media (max-width: 520px) {
+  .home-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─────────────────────────────────────────────
    PANEL HEADER
 ───────────────────────────────────────────── */
 .panel-header {
